@@ -78,9 +78,7 @@ const Login = () => {
         <div className="text-center text-gray-400">
           Don't have an account yet?{" "}
           <Link href="/register">
-            <div>
               <span className="text-blue-800 underline">Register</span>
-            </div>
           </Link>
         </div>
       </section>
