@@ -1,9 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
+import {useSession} from 'next-auth/react';
 
 export default function Home() {
-  const [session, setSession] = useState(false);
+  const {data : session} = useSession();
+
+  console.log(session);
   return (
     <div>
       <Head>
@@ -12,7 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {
-        session ? <User/> : <Guest/>
+        session ? <User session={session}/> : <Guest/>
       }
     </div>
   )
@@ -34,7 +37,7 @@ const Guest = () =>{
   )
 };
 
-const User = () =>{
+const User = ({session}) =>{
   return(
     <main className='container mx-auto text-center py-20'>
     <h1 className='text-4xl font-bold'>

@@ -6,10 +6,13 @@ import styles from "../styles/Form.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { GoMarkGithub } from "react-icons/go";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Login = () => {
-
   const [show, setShow] = useState(false);
+  const handleGoogleSignin = async () => {
+    signIn("google", { callbackUrl: "http://localhost:3000/" });
+  };
 
   return (
     <Layout>
@@ -47,7 +50,10 @@ const Login = () => {
               name="password"
               placeholder="password"
             />
-            <span className="icon flex items-center px-4 hover:text-[#6366f1] cursor-pointer" onClick={()=> setShow(prev => !prev)}>
+            <span
+              className="icon flex items-center px-4 hover:text-[#6366f1] cursor-pointer"
+              onClick={() => setShow((prev) => !prev)}
+            >
               <HiFingerPrint size={25} />
             </span>
           </div>
@@ -60,6 +66,7 @@ const Login = () => {
             <button
               type="button"
               className={`${styles.button_custom} flex items-center`}
+              onClick={handleGoogleSignin}
             >
               <FcGoogle />
               <span>Sign In with Google</span>
@@ -78,7 +85,7 @@ const Login = () => {
         <div className="text-center text-gray-400">
           Don't have an account yet?{" "}
           <Link href="/register">
-              <span className="text-blue-800 underline">Register</span>
+            <span className="text-blue-800 underline">Register</span>
           </Link>
         </div>
       </section>
