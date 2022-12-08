@@ -8,7 +8,7 @@
 }
 
 .button{
-    @apply w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded;
+    @apply w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded border;
     @apply py-3 text-gray-50 text-lg
 }
 .button:hover{
