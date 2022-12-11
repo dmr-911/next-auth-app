@@ -1,9 +1,11 @@
 import { hash } from "bcryptjs";
+import client from "../../../database/conn";
 import connectMongo from "../../../database/conn";
 import Users from "../../../model/Schema";
 
 export default async function handler(req, res) {
   connectMongo().catch((error) => res.json({ error: "Connection Failed!" }));
+  // await client.connect();
 
   // only post method is accepted
   if (req.method === "POST") {

@@ -21,17 +21,19 @@ const Register = () => {
   const onSubmit = async (values) => {
     console.log(values);
     const options = {
-      method :"POST",
-      headers : {'Content-Type' : 'application/json'},
-      body: JSON.stringify(values)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
     };
 
-    await fetch(`http://localhost:3000/api/auth/signup`, options).then(res => res.json()).then(data => {
-      console.log(data);
-      if(data) router.push(`/`)
-    }).catch(err =>{
-      console.log(err.message);
-    })
+    await fetch(`http://localhost:3000/api/auth/signup`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) router.push(`/`);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   const formik = useFormik({

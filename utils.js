@@ -5,3 +5,4 @@ export const GITHUB_CLIENT_ID = "199117901b2148821eae";
 export const GITHUB_CLIENT_SECRET = "a69be86a804750526adb98944aff7a32690d779c";
 export const MONGO_URL =
   "mongodb+srv://AuthUsers:wc5L3C7db8PVorlH@authcluster.mst1czu.mongodb.net/?retryWrites=true&w=majority";
+  
