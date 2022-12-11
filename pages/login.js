@@ -10,9 +10,16 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 const Login = () => {
   const [show, setShow] = useState(false);
+
+  // Google login handler 
   const handleGoogleSignin = async () => {
     signIn("google", { callbackUrl: "http://localhost:3000/" });
   };
+
+  // Github login handler 
+  const handleGithubSignin = async()=>{
+    signIn("github", {callbackUrl: "http://localhost:3000/"})
+  }
 
   return (
     <Layout>
@@ -76,6 +83,7 @@ const Login = () => {
             <button
               type="button"
               className={`${styles.button_custom} flex items-center`}
+              onClick={handleGithubSignin}
             >
               <GoMarkGithub />
               Sign In with Github
