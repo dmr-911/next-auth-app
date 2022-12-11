@@ -9,9 +9,11 @@ import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
 import { loginValidate } from "../lib/validate";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [show, setShow] = useState(false);
+  const router = useRouter();
 
   // Google login handler
   const handleGoogleSignin = async () => {
@@ -26,6 +28,14 @@ const Login = () => {
   // formik
   const onSubmit = async (values) => {
     console.log(values);
+    const status = await signIn('credentials', {
+      redirect: false,
+      email : values.email,
+      password : values.password,
+      callbackUrl : "/"
+    });
+
+    if(status.ok) router.push(status.url)
   };
   const formik = useFormik({
     initialValues: {
