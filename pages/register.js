@@ -7,32 +7,30 @@ import { GoMarkGithub } from "react-icons/go";
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import Link from "next/link";
 import { useFormik } from "formik";
+import { registerValidate } from "../lib/validate";
 
 const Register = () => {
   const [show, setShow] = useState({
-    password : false,
-    cpassword: false
+    password: false,
+    cpassword: false,
   });
 
-
-  // formik 
-  const validate = (values) =>{
-
-  }
-  const onSubmit = async (values) =>{
+  // formik
+  const validate = (values) => {};
+  const onSubmit = async (values) => {
     console.log(values);
-  }
+  };
 
   const formik = useFormik({
-    initialValues : {
+    initialValues: {
       username: "",
-      email : "",
-      password : "",
-      cpassword : ""
+      email: "",
+      password: "",
+      cpassword: "",
     },
-    validate,
-    onSubmit
-  })
+    validate: registerValidate,
+    onSubmit,
+  });
 
   return (
     <Layout>
@@ -46,74 +44,81 @@ const Register = () => {
         <div className="title">
           <h1 className="text-gray-800 text-4xl font-bold py-4">Register</h1>
           <p className="w-3/4 mx-auto text-gray-400">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout.
+            It is a long established fact that a reader will be distracted.
           </p>
         </div>
 
-        <form className="flex flex-col gap-5" action="submit" onSubmit={formik.handleSubmit}>
+        <form
+          className="flex flex-col gap-5"
+          action="submit"
+          onSubmit={formik.handleSubmit}
+        >
           <div className={styles.input_group}>
             <input
               className={styles.input_text}
               type="text"
               name="username"
               placeholder="User name"
-              {
-                ...formik.getFieldProps('username')
-              }
+              {...formik.getFieldProps("username")}
             />
             <span className="icon flex items-center px-4">
               <HiOutlineUser size={25} />
             </span>
           </div>
+          {formik.errors.username && formik.touched.username ? (
+            <span className="text-rose-500">{formik.errors.username}</span>
+          ) : null}
           <div className={styles.input_group}>
             <input
               className={styles.input_text}
               type="email"
               name="email"
               placeholder="email"
-              {
-                ...formik.getFieldProps('email')
-              }
+              {...formik.getFieldProps("email")}
             />
             <span className="icon flex items-center px-4">
               <HiAtSymbol size={25} />
             </span>
           </div>
+          {formik.errors.email && formik.touched.email ? (
+            <span className="text-rose-500">{formik.errors.email}</span>
+          ) : null}
           <div className={styles.input_group}>
             <input
               className={styles.input_text}
               type={show.password ? "text" : "password"}
               name="password"
               placeholder="password"
-              {
-                ...formik.getFieldProps('password')
-              }
+              {...formik.getFieldProps("password")}
             />
             <span
               className="icon flex items-center px-4 hover:text-[#6366f1] cursor-pointer"
-              onClick={() => setShow({...show, password: !show.password})}
+              onClick={() => setShow({ ...show, password: !show.password })}
             >
               <HiFingerPrint size={25} />
             </span>
           </div>
+          {formik.errors.password && formik.touched.password ? (
+            <span className="text-rose-500">{formik.errors.password}</span>
+          ) : null}
           <div className={styles.input_group}>
             <input
               className={styles.input_text}
               type={show.cpassword ? "text" : "password"}
               name="cpassword"
               placeholder="Confirm Password"
-              {
-                ...formik.getFieldProps('cpassword')
-              }
+              {...formik.getFieldProps("cpassword")}
             />
             <span
               className="icon flex items-center px-4 hover:text-[#6366f1] cursor-pointer"
-              onClick={() => setShow({...show, cpassword: !show.cpassword})}
+              onClick={() => setShow({ ...show, cpassword: !show.cpassword })}
             >
               <HiFingerPrint size={25} />
             </span>
           </div>
+          {formik.errors.cpassword && formik.touched.cpassword ? (
+            <span className="text-rose-500">{formik.errors.cpassword}</span>
+          ) : null}
           <div className="input-button">
             <button type="submit" className={`${styles.button}`}>
               Sign Up
@@ -123,9 +128,7 @@ const Register = () => {
         <div className="text-center text-gray-400 flex justify-center gap-2">
           Have an account?
           <Link href="/login">
-
-              <span className="text-blue-800 underline">Login</span>
-
+            <span className="text-blue-800 underline">Login</span>
           </Link>
         </div>
       </section>
