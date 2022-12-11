@@ -6,11 +6,32 @@ import { FcGoogle } from "react-icons/fc";
 import { GoMarkGithub } from "react-icons/go";
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import Link from "next/link";
+import { useFormik } from "formik";
 
 const Register = () => {
   const [show, setShow] = useState({
     password : false,
     cpassword: false
+  });
+
+
+  // formik 
+  const validate = (values) =>{
+
+  }
+  const onSubmit = async (values) =>{
+    console.log(values);
+  }
+
+  const formik = useFormik({
+    initialValues : {
+      username: "",
+      email : "",
+      password : "",
+      cpassword : ""
+    },
+    validate,
+    onSubmit
   })
 
   return (
@@ -30,13 +51,16 @@ const Register = () => {
           </p>
         </div>
 
-        <form className="flex flex-col gap-5" action="submit">
+        <form className="flex flex-col gap-5" action="submit" onSubmit={formik.handleSubmit}>
           <div className={styles.input_group}>
             <input
               className={styles.input_text}
               type="text"
-              name="Username"
+              name="username"
               placeholder="User name"
+              {
+                ...formik.getFieldProps('username')
+              }
             />
             <span className="icon flex items-center px-4">
               <HiOutlineUser size={25} />
@@ -48,6 +72,9 @@ const Register = () => {
               type="email"
               name="email"
               placeholder="email"
+              {
+                ...formik.getFieldProps('email')
+              }
             />
             <span className="icon flex items-center px-4">
               <HiAtSymbol size={25} />
@@ -59,6 +86,9 @@ const Register = () => {
               type={show.password ? "text" : "password"}
               name="password"
               placeholder="password"
+              {
+                ...formik.getFieldProps('password')
+              }
             />
             <span
               className="icon flex items-center px-4 hover:text-[#6366f1] cursor-pointer"
@@ -73,6 +103,9 @@ const Register = () => {
               type={show.cpassword ? "text" : "password"}
               name="cpassword"
               placeholder="Confirm Password"
+              {
+                ...formik.getFieldProps('cpassword')
+              }
             />
             <span
               className="icon flex items-center px-4 hover:text-[#6366f1] cursor-pointer"
@@ -83,7 +116,7 @@ const Register = () => {
           </div>
           <div className="input-button">
             <button type="submit" className={`${styles.button}`}>
-              Login
+              Sign Up
             </button>
           </div>
         </form>

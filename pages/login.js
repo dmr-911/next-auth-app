@@ -8,6 +8,7 @@ import { GoMarkGithub } from "react-icons/go";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useFormik } from "formik";
+import { loginValidate } from "../lib/validate";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -31,6 +32,7 @@ const Login = () => {
       email: "",
       password: "",
     },
+    validate: loginValidate,
     onSubmit,
   });
 
@@ -68,6 +70,9 @@ const Login = () => {
               <HiAtSymbol size={25} />
             </span>
           </div>
+          {formik.errors.email && formik.touched.email ? (
+            <span className="text-rose-500">{formik.errors.email}</span>
+          ) : null}
           <div className={styles.input_group}>
             <input
               className={styles.input_text}
@@ -83,6 +88,9 @@ const Login = () => {
               <HiFingerPrint size={25} />
             </span>
           </div>
+          {formik.errors.password && formik.touched.password ? (
+            <span className="text-rose-500">{formik.errors.password}</span>
+          ) : null}
           <div className="input-button">
             <button type="submit" className={`${styles.button}`}>
               Login
