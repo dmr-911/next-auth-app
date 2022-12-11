@@ -8,17 +8,30 @@ import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import Link from "next/link";
 import { useFormik } from "formik";
 import { registerValidate } from "../lib/validate";
+import { useRouter } from "next/router";
 
 const Register = () => {
   const [show, setShow] = useState({
     password: false,
     cpassword: false,
   });
+  const router = useRouter();
 
   // formik
-  const validate = (values) => {};
   const onSubmit = async (values) => {
     console.log(values);
+    const options = {
+      method :"POST",
+      headers : {'Content-Type' : 'application/json'},
+      body: JSON.stringify(values)
+    };
+
+    await fetch(`http://localhost:3000/api/auth/signup`, options).then(res => res.json()).then(data => {
+      console.log(data);
+      if(data) router.push(`/`)
+    }).catch(err =>{
+      console.log(err.message);
+    })
   };
 
   const formik = useFormik({
