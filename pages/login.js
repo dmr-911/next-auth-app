@@ -7,19 +7,32 @@ import { FcGoogle } from "react-icons/fc";
 import { GoMarkGithub } from "react-icons/go";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useFormik } from "formik";
 
 const Login = () => {
   const [show, setShow] = useState(false);
 
-  // Google login handler 
+  // Google login handler
   const handleGoogleSignin = async () => {
     signIn("google", { callbackUrl: "http://localhost:3000/" });
   };
 
-  // Github login handler 
-  const handleGithubSignin = async()=>{
-    signIn("github", {callbackUrl: "http://localhost:3000/"})
-  }
+  // Github login handler
+  const handleGithubSignin = async () => {
+    signIn("github", { callbackUrl: "http://localhost:3000/" });
+  };
+
+  // formik
+  const onSubmit = async (values) => {
+    console.log(values);
+  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit,
+  });
 
   return (
     <Layout>
@@ -38,13 +51,18 @@ const Login = () => {
           </p>
         </div>
 
-        <form className="flex flex-col gap-5" action="submit">
+        <form
+          className="flex flex-col gap-5"
+          action="submit"
+          onSubmit={formik.handleSubmit}
+        >
           <div className={styles.input_group}>
             <input
               className={styles.input_text}
               type="email"
               name="email"
               placeholder="email"
+              {...formik.getFieldProps("email")}
             />
             <span className="icon flex items-center px-4">
               <HiAtSymbol size={25} />
@@ -56,6 +74,7 @@ const Login = () => {
               type={show ? "text" : "password"}
               name="password"
               placeholder="password"
+              {...formik.getFieldProps("password")}
             />
             <span
               className="icon flex items-center px-4 hover:text-[#6366f1] cursor-pointer"
