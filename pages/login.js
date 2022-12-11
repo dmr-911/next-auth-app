@@ -58,7 +58,11 @@ const Login = () => {
           action="submit"
           onSubmit={formik.handleSubmit}
         >
-          <div className={styles.input_group}>
+          <div
+            className={`${styles.input_group} ${
+              formik.errors.email && formik.touched.email && "border-rose-500"
+            }`}
+          >
             <input
               className={styles.input_text}
               type="email"
@@ -70,10 +74,13 @@ const Login = () => {
               <HiAtSymbol size={25} />
             </span>
           </div>
-          {formik.errors.email && formik.touched.email ? (
-            <span className="text-rose-500">{formik.errors.email}</span>
-          ) : null}
-          <div className={styles.input_group}>
+          <div
+            className={`${styles.input_group} ${
+              formik.errors.password &&
+              formik.touched.password &&
+              "border-rose-500"
+            }`}
+          >
             <input
               className={styles.input_text}
               type={show ? "text" : "password"}
@@ -88,9 +95,6 @@ const Login = () => {
               <HiFingerPrint size={25} />
             </span>
           </div>
-          {formik.errors.password && formik.touched.password ? (
-            <span className="text-rose-500">{formik.errors.password}</span>
-          ) : null}
           <div className="input-button">
             <button type="submit" className={`${styles.button}`}>
               Login
