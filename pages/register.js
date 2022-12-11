@@ -71,8 +71,8 @@ const Register = () => {
           <div
             className={`${styles.input_group} ${
               formik.errors.username &&
-              formik.touched.username &&
-              "border-rose-500"
+              formik.touched.username ?
+              "border-rose-500" : null
             }`}
           >
             <input
@@ -88,7 +88,7 @@ const Register = () => {
           </div>
           <div
             className={`${styles.input_group} ${
-              formik.errors.email && formik.touched.email && "border-rose-500"
+              formik.errors.email && formik.touched.email ? "border-rose-500" : null
             }`}
           >
             <input
@@ -105,8 +105,8 @@ const Register = () => {
           <div
             className={`${styles.input_group} ${
               formik.errors.password &&
-              formik.touched.password &&
-              "border-rose-500"
+              formik.touched.password ?
+              "border-rose-500" : null
             }`}
           >
             <input
@@ -126,8 +126,8 @@ const Register = () => {
           <div
             className={`${styles.input_group} ${
               formik.errors.cpassword &&
-              formik.touched.cpassword &&
-              "border-rose-500"
+              formik.touched.cpassword ?
+              "border-rose-500" : null
             }`}
           >
             <input

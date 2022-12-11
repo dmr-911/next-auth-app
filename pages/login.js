@@ -70,7 +70,7 @@ const Login = () => {
         >
           <div
             className={`${styles.input_group} ${
-              formik.errors.email && formik.touched.email && "border-rose-500"
+              formik.errors.email && formik.touched.email ? "border-rose-500" : null
             }`}
           >
             <input
@@ -87,8 +87,8 @@ const Login = () => {
           <div
             className={`${styles.input_group} ${
               formik.errors.password &&
-              formik.touched.password &&
-              "border-rose-500"
+              formik.touched.password ?
+              "border-rose-500" : null
             }`}
           >
             <input
